@@ -1,0 +1,237 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, black 10%, rgb(0, 0, 71));
+    color: #ffffff;
+    animation: fadeIn 1s forwards;
+  }
+
+.footer {
+    margin-top: 15px;
+}
+
+.footer a {
+    color: #0070f3;
+    text-decoration: none;
+}
+.footer a:hover {
+    color: rgb(255, 251, 0);
+}
+img{
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+.containere{
+    
+    position: absolute;
+    top: 50%;
+    left: 14%;
+    z-index: 1;
+
+}
+.navbar {
+    display: flex; 
+    background-color: #1b1b1b;
+    padding: 15px 20px;
+    position: fixed; /* Fixa a navbar no topo */
+    top: 0;         /* Alinha ao topo da página */
+    width: 100%;    /* Faz com que a navbar ocupe toda a largura */
+    z-index: 1;  /* Garante que a navbar fique acima de outros elementos */
+    justify-content: center;
+    height: 50px;
+    font-size: 14px;
+    z-index: 2;
+  }
+
+
+.logo img {
+
+    height: 60px; /* Altura da imagem */
+
+}
+.nav-links {
+    list-style: none;
+    display: flex; /* Exibe os itens em linha */
+}
+
+.nav-links li {
+    margin-right: 20px; /* Espaçamento entre os itens */
+}
+
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 5px 10px;
+    transition: background-color 0.3s;
+}
+
+.nav-links a:hover {
+    background-color: #0003d194; /* Cor ao passar o mouse */
+    border-radius: 5px;
+}
+
+.user{
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 50%;
+    left: 85%;
+    z-index: 1;
+
+}
+.banner {
+    height: 500px;
+    color: white;
+    background-image: url('../assets/pexels-polina-tankilevitch-4522995.jpg');
+    background-size: cover;
+  }
+  
+  .banner .container {
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .banner .container h1 {
+    position: absolute;
+    top: 20%;
+    right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    margin: 0;
+    padding: 0;
+    font-size: 40px;
+    z-index: 1;
+  }
+  
+  .banner .container p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 30%;
+    left: 25%;
+    z-index: 1;
+  }
+  .container {
+    display: flex;
+    width: 80%;
+    margin: auto;
+  }
+  .banner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 21.8%;
+    background-color: rgba(0, 0, 0, 0.5); /* Cor preta com 50% de opacidade */
+    z-index: 1  ; /* Garante que o overlay fique acima da imagem */
+}
+    button{
+    z-index: 1;
+    position: absolute;
+    top: 45%;
+    right: 44.5%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: rgb(0, 0, 109);
+        color: #ffffff;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+        
+}
+button:hover {
+    color: white;
+    background-color: #000000;
+    transform: scale(1.1) rotate(1deg); /* Aumenta e gira o botão */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4); /* Sombra mais pronunciada */
+  }
+  @keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+  }
+  .social {
+    background-color: rgb(0, 0, 155);
+    display: flex;
+    height: 600px;
+  }
+  
+  .social .container {
+    justify-content: center;
+  }
+  
+ 
+  .social .container .boxes {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+  }
+  
+  .social p {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .img1{
+    position: absolute;
+    top: 93%;
+    left: 22.2%;
+  }
+  
+  .img2{
+    position: absolute;
+    top: 92%;
+    left: 49.9%;
+  }
+  
+  .img3{
+    position: absolute;
+    top: 92%;
+    left: 77.7%;
+  }
+  .footer {
+    position: absolute;
+    top: 150%;
+    left: 0%;
+    width: 100%;
+    background-color: #1b1b1b;
+    height: 150px;
+    color: white;
+    display: flex;
+    font-size: 15px;
+  }
+  
+  .footer .container {
+    justify-content: center;
+    text-align: center;
+    
+  }
+  
+  .footer .container .version {
+    font-size: 12px;
+  }

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">  
+    <link rel="shortcut icon" href="./assets/icon/Leonardo_Phoenix_Create_a_sleek_modern_logo_that_embodies_the_2-removebg-preview.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gammer Community</title>
+    <link rel="stylesheet" href="./css/cadastro.css">
+    <link rel="icon" href="./assets/icon/favicon2.ico" />
+    <script src="./js/sessao.js"></script>
+</head>
+<body onload="listar()">
+    <nav class="navbar">
+      <div class="containere">
+        <img src="./assets/Leonardo_Phoenix_Create_a_sleek_modern_logo_that_embodies_the_2-removebg-preview.png"  width="100" height="auto" alt="Logo">
+      </div>
+    <ul class="nav-links">
+        <li><a href="index.html">Início</a></li>
+        <li><a onclick="comunidade()" href="#">Comunidade</a></li>
+        <li><a onclick="dashboard()"  href="#">Dashboard</a></li>
+        <li><a onclick="sobre()"  href="curiosidades.html">Curiosidades</a></li>
+    </ul>
+    <div class="user">
+        <a href="login.html"><img src="assets/download-removebg-preview (3).png" width="50" height="auto"></a>
+    </div>           
+</nav>
+
+<div class="textinho">
+  <h1>Quase lá! <br> Só mais alguns passos para <br> entrar na Gamer Community!</h1>
+</div>
+
+     <div class="video">
+      <img src="./assets/game-analytics-animate.svg" width="250" height="auto" >
+      </div>
+       <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+          <span id="mensagem_erro"></span>
+        </div>
+      </div>
+  
+    <div class="container">
+        <div class="login-box">
+            <h2>Cadastro</h2>
+                <div class="input-group">
+                    <label for="username">Nome Completo</label>
+                    <input type="text" placeholder="Seu nome" id="nome_input">
+                </div>
+                <div class="input-group">
+                    <label for="Email">Email</label>
+                    <input type="text"  placeholder="meuemail@provedor.com"  id="email_input">
+                </div>
+                <div class="input-group">
+                    <label for="password">Criar Senha</label>
+                    <input type="password"  id="senha_input" placeholder="******">
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">Confirmar senha</label>
+                    <input type="password"  id="confirmacao_senha_input" placeholder="******">
+                </div>
+                <button onclick="cadastrar()">Cadastrar</button>
+                <div id="div_aguardar" class="loading-div">
+                    <img src="./assets/aguarde-pink2.gif" id="loading-gif" />
+                  </div>
+                  <div id="div_erros_login"></div>  
+            
+            <p class="footer">Já tem uma conta? <a href="login.html">Login</a></p>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+  
+  function comunidade(){
+      alert('Faça o login para ter acesso a essa página')
+      window.location = "login.html";
+  }
+  function dashboard(){
+      alert('Faça o login para ter acesso a essa página')
+      window.location = "login.html";
+  }
+  function cadastrar() {
+    var nomeVar = nome_input.value;
+    var emailVar = email_input.value;
+    var senhaVar = senha_input.value;
+    var confirmacaoSenhaVar = confirmacao_senha_input.value;
+    var indice_arroba = emailVar.indexOf('@')
+    var indice_ponto = emailVar.indexOf('.')  
+    
+    if (
+      nomeVar == "" &&
+      emailVar == "" &&
+      senhaVar == "" &&
+      confirmacaoSenhaVar == "" 
+    ) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Todos os campos estão em branco)";
+          setTimeout(function() {
+        cardErro.style.display = "none";
+           }, 3000);
+    return false;
+      }
+      
+      if (  nomeVar == "" ||
+        emailVar == "" ||
+        senhaVar == "" ||
+        confirmacaoSenhaVar == "" 
+      ) {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML =
+          "(Preencha todos os campos para prosseguir)";
+          setTimeout(function() {
+        cardErro.style.display = "none";
+           }, 3000);
+    return false;
+      }
+      
+      if (  nomeVar.includes(" ") == false
+      ) {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML =
+          "Insira o seu nome Completo";
+          setTimeout(function() {
+        cardErro.style.display = "none";
+           }, 3000);
+    return false;
+      }
+
+      
+    
+    if (emailVar.includes('@') == false && emailVar.includes('.com') == false && emailVar.includes('.br') == false) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(O email deve conter arroba '@' e '.com' ou '.br')";
+
+        setTimeout(function() {
+        cardErro.style.display = "none";
+           }, 3000);
+    return false;
+      }
+      
+    
+    if (emailVar.includes('@') == false) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(O email deve conter arroba '@')";
+
+        setTimeout(function() {
+        cardErro.style.display = "none";
+           }, 3000);
+    return false;
+      }
+     
+      if (emailVar.includes(".com") == false && emailVar.includes(".br") == false
+    ) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(O email deve terminar com '.com' ou '.br')";
+
+        setTimeout(function() {
+        cardErro.style.display = "none";
+           }, 3000);
+    return false;
+      }
+      
+    
+    if (emailVar.length < 8 ) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        `O email esta muito curto <br>
+        Insira um email válido`;
+
+        setTimeout(function() {
+        cardErro.style.display = "none";
+           }, 3000);
+    return false;
+      }  
+    
+    if (indice_arroba > indice_ponto
+    ) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+      "(O arroba '@' deve vir antes do ponto '.')";
+      
+      setTimeout(function() {
+        cardErro.style.display = "none";
+      }, 3000);
+      return false;
+    }
+    
+    if (senhaVar.length < 7
+      ) {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML =
+          "(A senha deve conter ao menos 8 caracteres)";
+  
+          setTimeout(function() {
+          cardErro.style.display = "none";
+             }, 3000);
+      return false;
+        }
+
+    if(senhaVar.includes(0) ||
+       senhaVar.includes(1) ||
+       senhaVar.includes(2) ||
+       senhaVar.includes(3) ||
+       senhaVar.includes(4) ||
+       senhaVar.includes(5) ||
+       senhaVar.includes(6) ||
+       senhaVar.includes(7) ||
+       senhaVar.includes(8) ||
+       senhaVar.includes(9)
+  ) {
+    var contemNum = true
+  } else {
+    
+    cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(A senha deve conter ao menos 1 número)";
+        
+        setTimeout(function() {
+          cardErro.style.display = "none";
+        }, 3000);
+    return false;
+      
+  }
+  if(senhaVar.includes("!") ||
+       senhaVar.includes("*") ||
+       senhaVar.includes("&") ||
+       senhaVar.includes("$") ||
+       senhaVar.includes("#") ||
+       senhaVar.includes("@") 
+  ) {
+    var contemCaracter = true
+  } else {
+    
+    cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(A senha deve conter ao menos 1 caractere especial)";
+
+        setTimeout(function() {
+        cardErro.style.display = "none";
+           }, 3000);
+    return false;
+      
+  }
+          
+   
+  
+  
+  if (senhaVar != confirmacaoSenhaVar
+    ) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(As senha não coincidem)";
+
+        setTimeout(function() {
+        cardErro.style.display = "none";
+           }, 3000);
+    return false;
+      }
+
+    
+
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          cardErro.style.display = "block";
+
+          mensagem_erro.innerHTML =
+            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+
+          limparFormulario();
+          finalizarAguardar();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+      });
+
+    return false;
+  }
+
+
+  function sumirMensagem() {
+    cardErro.style.display = "none";
+  }
+</script>

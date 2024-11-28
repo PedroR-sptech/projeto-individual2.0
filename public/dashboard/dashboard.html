@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gammer Community</title>
+  <link rel="shortcut icon"
+    href="./assets/icon/Leonardo_Phoenix_Create_a_sleek_modern_logo_that_embodies_the_2-removebg-preview.ico"
+    type="image/x-icon">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link rel="stylesheet" href="./../css/dashboards.css">
+  <script src="../js/sessao.js"></script>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+</head>
+
+<body onload="obterDadosGrafico()" style="background-color: #161618;">
+
+  <div class="pai">
+    <div class="painel">
+      <div class="titulos">
+        <h1><b>Melhor Jogo da Comunidade</b></h1>
+      </div>
+      <div class="jogos-concorrentes">
+        <div class="jogo" onclick="votar('Rocket League')" id="jogo1">
+          <img src="../assets/rl.png" alt="" width="150px" height="250px" />
+          <p>ROCKET LEAGUE</p>
+        </div>
+        <div class="jogo" onclick="votar('Fortnite')" id="jogo2">
+          <img src="../assets/fort.png" alt="" width="150px" height="250px" />
+          <p>FORTNITE</p>
+        </div>
+        <div class="jogo" onclick="votar('GTA V')" id="jogo3">
+          <img src="../assets/gtavv.png" alt="" width="150px" height="250px"/>
+          <p>GTA V</p>
+        </div>
+        <div class="jogo" onclick="votar('Rainbow Six Siege')" id="jogo4">
+          <img src="../assets/r6.png" alt="" width="150px" height="250px"/>
+          <p>RAINBOW SIX SIEGE</p>
+        </div>
+        <div class="jogo" onclick="votar('Fall Guys')" id="jogo5">
+          <img src="../assets/fall.png" width="150px" height="250px"/>
+          <p>FALL GUYS</p>
+        </div>
+        <div class="jogo" onclick="votar('Minecraft')" id="jogo6">
+          <img src="../assets/minecraft.png" alt="" width="150px" height="250px"/>
+          <p>MINECRAFT</p>
+        </div>
+      </div>
+    </div>
+
+
+      <div class="header-left">
+
+        <img src="../assets/Leonardo_Phoenix_Create_a_sleek_modern_logo_that_embodies_the_2-removebg-preview.png"
+          class="logo">
+
+        <div class="hello">
+          <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+        </div>
+
+        <div class="btn-nav">
+          <a href="mural.html">
+            <h3>Mural da Comunidade</h3>
+          </a>
+        </div>
+
+
+        <div class="ativo">
+          <div class="btn-nav">
+            <h3>Mural de Votação</h3>
+          </div>
+        </div>
+        <div class="btn-logout" onclick="limparSessao()">
+          <h3>Logout</h3>
+        </div>
+      </div>
+</body>
+
+</html>
+<script>
+  b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+  let myChart;
+
+  function votar(nomeJogo) {
+    fetch(`/votos/votar/${nomeJogo}`, {
+      method: "POST",
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log(`Voto contabilizado`);
+          atualizarGrafico();
+          window.location = "/dashboard/dash.html";
+        } else {
+          console.error("Erro na votação ou jogo não encontrado");
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro ao realizar o voto: ${error.message}`);
+      });
+  }
+
+  function plotarGrafico(resposta) {
+    console.log("iniciando plotagem do gráfico...");
+
+    // Criando estrutura para plotar gráfico - labels
+    let labels = [
+      "Rocket League",
+      "Fortnite",
+      "GTA V",
+      "Rainbow Six Siege",
+      "Fall Guys",
+      "Minecraft",
+    ];
+
+    // Criando estrutura para plotar gráfico - dados
+    let dados = {
+      labels: labels,
+      datasets: [
+        {
+          label: "Votos",
+          data: [],
+          fill: false,
+          backgroundColor: [
+            "rgba(75, 192, 192, 0.2)",
+            "rgba(255, 99, 132, 0.2)",
+            "rgba(54, 162, 235, 0.2)",
+          ],
+          borderColor: [
+            "rgba(75, 192, 192, 1)",
+            "rgba(255, 99, 132, 1)",
+            "rgba(54, 162, 235, 1)",
+          ],
+          borderWidth: 1,
+          tension: 0.1,
+        },
+      ],
+    };
+
+    console.log("----------------------------------------------");
+    console.log(
+      'Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":'
+    );
+    console.log(resposta);
+
+    // Inserindo valores recebidos em estrutura para plotar o gráfico
+
+    for (i = 0; i < resposta.length; i++) {
+      var registro = resposta[i];
+      dados.datasets[0].data.push(registro.quantidade);
+    }
+
+    console.log("----------------------------------------------");
+    console.log("O gráfico será plotado com os respectivos valores:");
+    console.log("Labels:");
+    console.log(labels);
+    console.log("Dados:");
+    console.log(dados.datasets);
+    console.log("----------------------------------------------");
+
+    // Criando estrutura para plotar gráfico - config
+    const config = {
+      type: "bar",
+      data: dados,
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: "VOTAÇÃO",
+            color: "#FFFFFF",
+            font: {
+              size: 20,
+            },
+          },
+          legend: {
+            display: true,
+            labels: {
+              color: "white",
+            },
+          },
+        },
+      },
+    };
+
+    // Adicionando gráfico criado em div na tela
+    myChart = new Chart(document.getElementById("myCanvas"), config);
+  }
+
+  function atualizarGrafico() {
+    fetch(`/votos/ultimos`, { cache: "no-store" })
+      .then(function (resposta) {
+        if (resposta.ok) {
+          resposta.json().then(function (respostaJSON) {
+            console.log(`Dados recebidos: ${JSON.stringify(respostaJSON)}`);
+            console.log(`Dados atuais do gráfico:`);
+            console.log(myChart.data);
+
+            myChart.data.datasets[0].data = [];
+
+            for (let i = 0; i < respostaJSON.length; i++) {
+              myChart.data.datasets[0].data.push(respostaJSON[i].quantidade);
+            }
+
+            myChart.update();
+          });
+        } else {
+          console.error("Nenhum dado encontrado ou erro na API");
+        }
+      })
+      .catch(function (error) {
+        console.error(
+          `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+        );
+      });
+  }
+</script>
